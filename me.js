@@ -1,0 +1,2 @@
+import {db,auth,method,fail} from "./_lib.js";
+export default async function handler(req,res){try{method(req,["GET"]);const u=auth(req);const q=await db().query("SELECT id,full_name,email,role,created_at FROM users WHERE id=$1",[u.id]);return res.json({user:q.rows[0]});}catch(e){return fail(res,e)}}
